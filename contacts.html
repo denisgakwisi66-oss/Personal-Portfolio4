@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | GAKWISI Shimo Denis</title>
+    <meta name="description" content="Contact GAKWISI Shimo Denis - Full-Stack Developer & UI/UX Designer. Get in touch for projects, collaborations, or inquiries.">
+    <link rel="canonical" href="https://den-web.netlify.app/contacts.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://den-web.netlify.app/contacts.html">
+    <meta property="og:title" content="Contact | GAKWISI Shimo Denis">
+    <meta property="og:description" content="Contact GAKWISI Shimo Denis - Full-Stack Developer & UI/UX Designer. Get in touch for projects, collaborations, or inquiries.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Contact | GAKWISI Shimo Denis">
+    <meta name="twitter:description" content="Contact GAKWISI Shimo Denis - Full-Stack Developer & UI/UX Designer. Get in touch for projects, collaborations, or inquiries.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/style.css">
+
+    <style>
+        /* ===== Toast ===== */
+        .toast {
+            position: fixed;
+            top: 100px;
+            right: 2rem;
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transform: translateX(120%);
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 9999;
+            max-width: 400px;
+        }
+        .toast.show { transform: translateX(0); }
+        .toast.success { border-color: #22C55E; }
+        .toast.error { border-color: #EF4444; }
+        .toast-icon { font-size: 1.5rem; }
+        .toast-message { font-weight: 500; }
+
+        /* ===== Contact Hero ===== */
+        .contact-hero {
+            padding: 120px 0 60px;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            text-align: center;
+        }
+        .contact-hero-title {
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin: 0.5rem 0;
+        }
+        .contact-hero-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* ===== Contact Section ===== */
+        .contact-section {
+            padding: 4rem 0;
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Contact Info */
+        .contact-info h2 {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .contact-info > p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .contact-details { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--surface);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            transition: all var(--transition);
+        }
+        .contact-item:hover {
+            border-color: var(--primary);
+            transform: translateX(4px);
+            box-shadow: var(--shadow);
+        }
+        .contact-item-icon {
+            width: 44px;
+            height: 44px;
+            min-width: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+        }
+        .contact-item-icon svg { width: 20px; height: 20px; stroke: white; }
+        .contact-item-content h4 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 0.125rem;
+        }
+        .contact-item-content a,
+        .contact-item-content span {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text);
+            text-decoration: none;
+            transition: color var(--transition);
+        }
+        .contact-item-content a:hover { color: var(--primary); }
+
+        .copy-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0.25rem;
+            margin-left: 0.5rem;
+            transition: all var(--transition);
+            vertical-align: middle;
+        }
+        .copy-btn:hover { color: var(--primary); transform: scale(1.1); }
+        .copy-btn svg { width: 16px; height: 16px; }
+
+        .contact-social h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+        .social-links { display: flex; gap: 0.75rem; }
+        .social-links a {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            transition: all var(--transition);
+            text-decoration: none;
+        }
+        .social-links a:hover {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(37,99,235,0.3);
+        }
+        .social-links a svg { width: 20px; height: 20px; }
+
+        /* Contact Form */
+        .contact-form-wrapper {
+            background: var(--surface);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            padding: 2rem;
+        }
+        .contact-form-wrapper h2 {
+            font-family: var(--font-heading);
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+        .contact-form-wrapper > p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+        .form-group { display: flex; flex-direction: column; gap: 0.25rem; }
+        .form-group label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+        .form-group input,
+        .form-group textarea {
+            padding: 0.75rem 1rem;
+            background: var(--bg);
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            color: var(--text);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: all var(--transition);
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(37,99,235,0.1);
+        }
+        .form-group input.error,
+        .form-group textarea.error {
+            border-color: #EF4444;
+        }
+        .form-error {
+            color: #EF4444;
+            font-size: 0.8rem;
+            min-height: 1.25rem;
+        }
+        .form-honeypot { position: absolute; left: -9999px; top: -9999px; }
+
+        .submit-btn {
+            width: 100%;
+            padding: 0.875rem;
+            font-size: 1.125rem;
+            justify-content: center;
+            position: relative;
+        }
+        .submit-btn .btn-loading {
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .submit-btn .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        .submit-btn:disabled { opacity: 0.7; cursor: not-allowed; }
+
+        /* Map */
+        .map-container {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            padding: 0 2rem;
+        }
+        .map-placeholder {
+            width: 100%;
+            height: 300px;
+            border-radius: var(--radius);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .map-placeholder::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(37,99,235,0.05) 0%, transparent 70%);
+        }
+        .map-content { text-align: center; z-index: 1; }
+        .map-icon { font-size: 3rem; display: block; margin-bottom: 0.5rem; }
+        .map-content h3 { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; margin-bottom: 0.25rem; }
+        .map-content p { color: var(--text-secondary); margin-bottom: 0.5rem; }
+        .map-link {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            transition: color var(--transition);
+        }
+        .map-link:hover { color: var(--secondary); }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 1024px) {
+            .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .contact-info { order: 2; }
+            .contact-form-wrapper { order: 1; }
+        }
+        @media (max-width: 768px) {
+            .contact-hero-title { font-size: 2.5rem; }
+            .contact-info h2 { font-size: 1.75rem; }
+            .contact-form-wrapper h2 { font-size: 1.5rem; }
+            .contact-item { padding: 0.75rem; }
+            .map-placeholder { height: 200px; }
+        }
+        @media (max-width: 480px) {
+            .contact-item { flex-direction: column; align-items: center; text-align: center; }
+            .social-links { justify-content: center; }
+            .contact-item-content .copy-btn { display: block; margin: 0.25rem auto 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Loading Screen -->
+    <div id="loadingScreen">
+        <div class="loading-inner">
+            <div class="loading-spinner"></div>
+            <p class="loading-name">GAKWISI Shimo Denis</p>
+            <p class="loading-text">Loading Portfolio...</p>
+        </div>
+    </div>
+
+    <!-- Scroll Progress -->
+    <div id="scrollProgress"></div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <span class="toast-icon">✅</span>
+        <span class="toast-message">Message sent!</span>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <a href="index.html" class="nav-logo">GSD</a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="skills.html">Skills & Services</a></li>
+            <li><a href="contacts.html" class="active">Contact</a></li>
+        </ul>
+        <div class="nav-controls">
+            <button type="button" class="theme-toggle" id="themeToggle">
+                <span class="theme-icon-sun">☀️</span>
+                <span class="theme-icon-moon">🌙</span>
+            </button>
+            <button type="button" class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="skills.html">Skills & Services</a>
+        <a href="contacts.html" class="active">Contact</a>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Contact Hero -->
+        <section class="contact-hero">
+            <div class="container">
+                <span class="section-badge">Get in Touch</span>
+                <h1 class="contact-hero-title">Let's Connect</h1>
+                <p class="contact-hero-subtitle">Have a project in mind? Let's work together to bring your ideas to life</p>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section">
+            <div class="container">
+                <div class="contact-grid">
+                    <!-- Contact Information -->
+                    <div class="contact-info" data-reveal>
+                        <h2>Contact Information</h2>
+                        <p>Feel free to reach out through any of the channels below. I'll get back to you as soon as possible.</p>
+
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <div class="contact-item-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                </div>
+                                <div class="contact-item-content">
+                                    <h4>Email</h4>
+                                    <a href="mailto:denisgakwisi66@gmail.com">denisgakwisi66@gmail.com</a>
+                                    <button type="button" class="copy-btn" data-copy="denisgakwisi66@gmail.com" aria-label="Copy email">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="contact-item">
+                                <div class="contact-item-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.574 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                </div>
+                                <div class="contact-item-content">
+                                    <h4>WhatsApp</h4>
+                                    <a href="https://wa.me/250780321523">+250 780 321 523</a>
+                                </div>
+                            </div>
+
+                            <div class="contact-item">
+                                <div class="contact-item-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10.5V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9.5"/><polyline points="16 2 22 8 16 8"/><line x1="10" y1="14" x2="21" y2="3"/><line x1="10" y1="14" x2="14" y2="18"/><line x1="10" y1="14" x2="17" y2="11"/></svg>
+                                </div>
+                                <div class="contact-item-content">
+                                    <h4>Instagram</h4>
+                                    <a href="https://instagram.com/g.s.d58" target="_blank" rel="noopener noreferrer">@g.s.d58</a>
+                                </div>
+                            </div>
+
+                            <div class="contact-item">
+                                <div class="contact-item-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                                </div>
+                                <div class="contact-item-content">
+                                    <h4>Location</h4>
+                                    <span>Rwanda</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="contact-social">
+                            <h4>Follow Me</h4>
+                            <div class="social-links">
+                                <a href="https://github.com/denisgakwisi66-oss" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.15 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.62.24 2.85.12 3.15.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                                </a>
+                                <a href="https://www.linkedin.com/in/shimo-denis-908332386/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                                </a>
+                                <a href="https://x.com/home" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                                </a>
+                                <a href="https://instagram.com/g.s.d58" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="contact-form-wrapper" data-reveal>
+                        <h2>Send Me a Message</h2>
+                        <p>Fill out the form below and I'll get back to you within 24 hours.</p>
+
+                        <form class="contact-form" id="contactForm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+                            <input type="hidden" name="form-name" value="contact">
+                            <p class="form-honeypot">
+                                <label>Leave this field empty: <input name="bot-field"></label>
+                            </p>
+
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" name="name" placeholder="Shimo Denis" required>
+                                <div class="form-error" data-error="name"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" placeholder="shimo@gmail.com" required>
+                                <div class="form-error" data-error="email"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" name="subject" placeholder="Project Inquiry" required>
+                                <div class="form-error" data-error="subject"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" rows="5" placeholder="Tell me about your project..." required></textarea>
+                                <div class="form-error" data-error="message"></div>
+                            </div>
+
+                            <button type="submit" class="btn-primary submit-btn" id="submitBtn">
+                                <span class="btn-text">Send Message</span>
+                                <span class="btn-loading">
+                                    <span class="spinner"></span>
+                                    <span>Sending...</span>
+                                </span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Map -->
+                <div class="map-container" data-reveal>
+                    <div class="map-placeholder">
+                        <div class="map-content">
+                            <span class="map-icon">📍</span>
+                            <h3>Find Me</h3>
+                            <p>Rwanda, East Africa</p>
+                            <a href="https://www.google.com/maps/place/KG+319+St,+Kigali/@-1.9249528,30.1041496,947m/data=!3m2!1e3!4b1!4m6!3m5!1s0x19dca6d362910d77:0x8b3fdf0488b438d6!8m2!3d-1.9249528!4d30.1067245!16s%2Fg%2F12xpyqts9?entry=ttu&g_ep=EgoyMDI2MDcyMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" class="map-link">View on Google Maps →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div>
+                <h3 class="footer-name">GAKWISI Shimo Denis</h3>
+                <p class="footer-tagline">Building the future, one line of code at a time.</p>
+                <div class="footer-social">
+                    <a href="mailto:denisgakwisi66@gmail.com" aria-label="Email">✉</a>
+                    <a href="https://wa.me/250780321523" aria-label="WhatsApp">📱</a>
+                    <a href="https://www.instagram.com/g.s.d58/" aria-label="Instagram">📸</a>
+                </div>
+            </div>
+            <div>
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="skills.html">Skills & Services</a></li>
+                    <li><a href="contacts.html">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="mailto:denisgakwisi66@gmail.com">denisgakwisi66@gmail.com</a></li>
+                    <li><a href="https://wa.me/250780321523">+250 780 321 523</a></li>
+                    <li>@g.s.d58</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="year"></span> GAKWISI Shimo Denis. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top -->
+    <button type="button" class="scroll-top" id="scrollTop" aria-label="Scroll to top">↑</button>
+
+    <script src="assets/main.js" defer></script>
+    <script src="assets/chatbot.js" defer></script>
+    <script>
+        (function() {
+            'use strict';
+            document.addEventListener('DOMContentLoaded', function() {
+
+                // ===== Copy to Clipboard =====
+                document.querySelectorAll('.copy-btn').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        const text = this.dataset.copy;
+                        if (text) {
+                            navigator.clipboard.writeText(text).then(function() {
+                                showToast('✅', 'Email copied to clipboard!', 'success');
+                            }).catch(function() {
+                                const textarea = document.createElement('textarea');
+                                textarea.value = text;
+                                document.body.appendChild(textarea);
+                                textarea.select();
+                                document.execCommand('copy');
+                                document.body.removeChild(textarea);
+                                showToast('✅', 'Email copied to clipboard!', 'success');
+                            });
+                        }
+                    });
+                });
+
+                // ===== Toast =====
+                function showToast(icon, message, type) {
+                    const toast = document.getElementById('toast');
+                    if (!toast) return;
+                    toast.querySelector('.toast-icon').textContent = icon;
+                    toast.querySelector('.toast-message').textContent = message;
+                    toast.className = 'toast ' + type;
+                    void toast.offsetWidth;
+                    toast.classList.add('show');
+                    clearTimeout(toast._hideTimeout);
+                    toast._hideTimeout = setTimeout(function() {
+                        toast.classList.remove('show');
+                    }, 4000);
+                }
+
+                // ===== Form Validation & Submission =====
+                const form = document.getElementById('contactForm');
+                const submitBtn = document.getElementById('submitBtn');
+                const btnText = submitBtn.querySelector('.btn-text');
+                const btnLoading = submitBtn.querySelector('.btn-loading');
+
+                function encodeFormData(data) {
+                    return Object.keys(data).map(function(key) {
+                        return encodeURIComponent(key) + '=' + encodeURIComponent(data[key]);
+                    }).join('&');
+                }
+
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    // Honeypot: if a bot filled this hidden field, silently drop the submission.
+                    const honeypot = form.querySelector('[name="bot-field"]');
+                    if (honeypot && honeypot.value) return;
+
+                    // Validate — each field gets its own pass/fail so one bad field
+                    // doesn't mark every other (valid) field as errored too.
+                    let formValid = true;
+                    const inputs = form.querySelectorAll('input:not([type="hidden"]):not([name="bot-field"]), textarea');
+                    inputs.forEach(function(input) {
+                        const errorEl = document.querySelector('[data-error="' + input.id + '"]');
+                        let message = '';
+                        let fieldValid = true;
+
+                        if (input.hasAttribute('required') && !input.value.trim()) {
+                            fieldValid = false;
+                            message = input.id.charAt(0).toUpperCase() + input.id.slice(1) + ' is required.';
+                        } else if (input.type === 'email' && input.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value)) {
+                            fieldValid = false;
+                            message = 'Please enter a valid email address.';
+                        } else if (input.id === 'message' && input.value.trim().length < 10) {
+                            fieldValid = false;
+                            message = 'Message must be at least 10 characters.';
+                        }
+
+                        if (fieldValid) {
+                            input.classList.remove('error');
+                            if (errorEl) errorEl.textContent = '';
+                        } else {
+                            formValid = false;
+                            input.classList.add('error');
+                            if (errorEl) errorEl.textContent = message;
+                        }
+                    });
+
+                    if (!formValid) return;
+
+                    btnText.style.display = 'none';
+                    btnLoading.style.display = 'flex';
+                    submitBtn.disabled = true;
+
+                    const data = {
+                        'form-name': 'contact',
+                        name: document.getElementById('name').value,
+                        email: document.getElementById('email').value,
+                        subject: document.getElementById('subject').value,
+                        message: document.getElementById('message').value
+                    };
+
+                    fetch('/', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: encodeFormData(data)
+                    })
+                        .then(function(res) {
+                            if (!res.ok) throw new Error('Submission failed with status ' + res.status);
+                            form.reset();
+                            form.querySelectorAll('.error').forEach(function(el) { el.classList.remove('error'); });
+                            form.querySelectorAll('.form-error').forEach(function(el) { el.textContent = ''; });
+                            showToast('✅', "Message sent successfully! I'll get back to you soon.", 'success');
+                        })
+                        .catch(function() {
+                            showToast('⚠️', 'Something went wrong. Please try emailing me directly instead.', 'error');
+                        })
+                        .finally(function() {
+                            btnText.style.display = 'inline';
+                            btnLoading.style.display = 'none';
+                            submitBtn.disabled = false;
+                        });
+                });
+
+                // Real-time validation
+                form.querySelectorAll('input:not([type="hidden"]):not([name="bot-field"]), textarea').forEach(function(input) {
+                    input.addEventListener('blur', function() {
+                        const errorEl = document.querySelector('[data-error="' + this.id + '"]');
+                        let message = '';
+                        if (this.hasAttribute('required') && !this.value.trim()) {
+                            this.classList.add('error');
+                            message = this.id.charAt(0).toUpperCase() + this.id.slice(1) + ' is required.';
+                        } else if (this.type === 'email' && this.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.value)) {
+                            this.classList.add('error');
+                            message = 'Please enter a valid email address.';
+                        } else if (this.id === 'message' && this.value.trim().length < 10 && this.value.trim().length > 0) {
+                            this.classList.add('error');
+                            message = 'Message must be at least 10 characters.';
+                        } else {
+                            this.classList.remove('error');
+                        }
+                        if (errorEl) errorEl.textContent = message;
+                    });
+                    input.addEventListener('input', function() {
+                        if (this.classList.contains('error')) {
+                            this.dispatchEvent(new Event('blur'));
+                        }
+                    });
+                });
+
+            });
+        })();
+    </script>
+</body>
+</html>

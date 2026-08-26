@@ -1,0 +1,9 @@
+{
+  "name": "gakwisi-shimo-denis-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Personal portfolio site for GAKWISI Shimo Denis, with a Netlify Function powering an AI chat widget.",
+  "dependencies": {
+    "@netlify/blobs": "latest"
+  }
+}

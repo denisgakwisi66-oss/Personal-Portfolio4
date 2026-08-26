@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | GAKWISI Shimo Denis</title>
+    <meta name="description" content="Explore projects by GAKWISI Shimo Denis - Full-Stack Developer & UI/UX Designer. Web applications, design projects, and more.">
+    <link rel="canonical" href="https://den-web.netlify.app/projects.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://den-web.netlify.app/projects.html">
+    <meta property="og:title" content="Projects | GAKWISI Shimo Denis">
+    <meta property="og:description" content="Explore projects by GAKWISI Shimo Denis - Full-Stack Developer & UI/UX Designer. Web applications, design projects, and more.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Projects | GAKWISI Shimo Denis">
+    <meta name="twitter:description" content="Explore projects by GAKWISI Shimo Denis - Full-Stack Developer & UI/UX Designer. Web applications, design projects, and more.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/style.css">
+
+    <style>
+        /* ===== Projects Hero ===== */
+        .projects-hero {
+            padding: 120px 0 60px;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            text-align: center;
+        }
+        .projects-hero-title {
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin: 0.5rem 0;
+        }
+        .projects-hero-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* ===== Projects Section ===== */
+        .projects-section {
+            padding: 4rem 0;
+        }
+
+        /* Controls */
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 2rem;
+        }
+        .search-box {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 0.75rem 1.25rem;
+            background: var(--surface);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 1rem;
+            font-family: var(--font-body);
+            transition: all var(--transition);
+        }
+        .search-box:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(37,99,235,0.1);
+        }
+        .search-box::placeholder { color: var(--text-secondary); }
+
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+        .filter-btn {
+            padding: 0.5rem 1.25rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition);
+            font-family: var(--font-body);
+        }
+        .filter-btn:hover {
+            border-color: var(--primary);
+            color: var(--text);
+            transform: translateY(-2px);
+        }
+        .filter-btn.active {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(37,99,235,0.3);
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Project Card */
+        .project-card {
+            background: var(--surface);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: all var(--transition);
+        }
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--primary);
+        }
+        .project-card.hidden { display: none; }
+
+        .project-image {
+            height: 220px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .project-emoji {
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+        }
+        .project-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            -webkit-backdrop-filter: blur(4px);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            opacity: 0;
+            transition: all var(--transition);
+        }
+        .project-card:hover .project-overlay { opacity: 1; }
+        .project-overlay a {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
+            transition: all var(--transition);
+            transform: translateY(20px);
+            opacity: 0;
+            text-decoration: none;
+        }
+        .project-card:hover .project-overlay a {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .project-overlay a:hover {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.1);
+        }
+        .project-overlay a:nth-child(2) { transition-delay: 0.05s; }
+        .project-overlay svg { width: 20px; height: 20px; }
+
+        .project-content { padding: 1.5rem; }
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .project-category {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 0.25rem 0.75rem;
+            background: rgba(37,99,235,0.1);
+            color: var(--primary);
+            border-radius: 50px;
+        }
+        .project-status {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+        }
+        .status-completed { background: rgba(34,197,94,0.1); color: #22C55E; }
+        .status-inprogress { background: rgba(251,146,60,0.1); color: #FB923C; }
+        .status-planning { background: rgba(99,102,241,0.1); color: #6366F1; }
+
+        .project-title {
+            font-family: var(--font-heading);
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .project-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
+        }
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .project-tech span {
+            padding: 0.25rem 0.75rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+        .project-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 0.75rem;
+            border-top: 1px solid var(--border);
+        }
+        .project-date { color: var(--text-secondary); font-size: 0.875rem; }
+
+        .no-results {
+            text-align: center;
+            padding: 4rem 0;
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            display: none;
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 1024px) {
+            .projects-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .projects-hero-title { font-size: 2.5rem; }
+            .projects-grid { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; }
+            .filters { gap: 0.35rem; }
+            .filter-btn { padding: 0.35rem 0.875rem; font-size: 0.8rem; }
+            .search-box { max-width: 100%; }
+        }
+        @media (max-width: 480px) {
+            .project-image { height: 180px; }
+            .project-header { flex-direction: column; align-items: flex-start; gap: 0.25rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Loading Screen -->
+    <div id="loadingScreen">
+        <div class="loading-inner">
+            <div class="loading-spinner"></div>
+            <p class="loading-name">GAKWISI Shimo Denis</p>
+            <p class="loading-text">Loading Portfolio...</p>
+        </div>
+    </div>
+
+    <!-- Scroll Progress -->
+    <div id="scrollProgress"></div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <a href="index.html" class="nav-logo">GSD</a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="projects.html" class="active">Projects</a></li>
+            <li><a href="skills.html">Skills & Services</a></li>
+            <li><a href="contacts.html">Contact</a></li>
+        </ul>
+        <div class="nav-controls">
+            <button type="button" class="theme-toggle" id="themeToggle">
+                <span class="theme-icon-sun">☀️</span>
+                <span class="theme-icon-moon">🌙</span>
+            </button>
+            <button type="button" class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html" class="active">Projects</a>
+        <a href="skills.html">Skills & Services</a>
+        <a href="contacts.html">Contact</a>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Projects Hero -->
+        <section class="projects-hero">
+            <div class="container">
+                <span class="section-badge">My Work</span>
+                <h1 class="projects-hero-title">Featured Projects</h1>
+                <p class="projects-hero-subtitle">A showcase of my recent work and creative endeavors</p>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section class="projects-section">
+            <div class="controls">
+                <input type="text" class="search-box" id="searchInput" placeholder="🔍 Search projects...">
+                <div class="filters">
+                    <button type="button" class="filter-btn active" data-filter="all">All</button>
+                    <button type="button" class="filter-btn" data-filter="web">Web Apps</button>
+                    <button type="button" class="filter-btn" data-filter="design">UI/UX</button>
+                    <button type="button" class="filter-btn" data-filter="mobile">Mobile</button>
+                    <button type="button" class="filter-btn" data-filter="api">API</button>
+                </div>
+            </div>
+
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Project 1 -->
+                <div class="project-card" data-category="web" data-reveal>
+                    <div class="project-image">
+                        <span class="project-emoji">💻</span>
+                        <div class="project-overlay">
+                            <a href="https://app.netlify.com/teams/denisgakwisi66/projects" target="_blank" rel="noopener noreferrer" aria-label="Netlify">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.15 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.62.24 2.85.12 3.15.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                            </a>
+                            <a href="https://luxefasi0n.netlify.app/" target="_blank" rel="noopener noreferrer" aria-label="Live Demo">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <span class="project-category">Web App</span>
+                            <span class="project-status status-completed">Completed</span>
+                        </div>
+                        <h3 class="project-title">E-Commerce Platform</h3>
+                        <p class="project-desc">A full-featured e-commerce platform with real-time inventory, payment processing, and admin dashboard.</p>
+                        <div class="project-tech">
+                            <span>HTML</span><span>CSS</span><span>MongoDB</span><span>JavaScript</span>
+                        </div>
+                        <div class="project-footer">
+                            <span class="project-date">2024</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card" data-category="design" data-reveal>
+                    <div class="project-image">
+                        <span class="project-emoji">🎨</span>
+                        <div class="project-overlay">
+                            <a href="https://github.com/denisgakwisi66-oss" target="_blank" rel="noopener noreferrer" aria-label="View GitHub profile">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.15 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.62.24 2.85.12 3.15.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <span class="project-category">UI/UX Design</span>
+                            <span class="project-status status-completed">Completed</span>
+                        </div>
+                        <h3 class="project-title">Mobile Banking App</h3>
+                        <p class="project-desc">Modern UI/UX design for a mobile banking application with focus on security and user experience.</p>
+                        <div class="project-tech">
+                            <span>Figma</span><span>Adobe XD</span><span>Prototyping</span>
+                        </div>
+                        <div class="project-footer">
+                            <span class="project-date">2024</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card" data-category="web" data-reveal>
+                    <div class="project-image">
+                        <span class="project-emoji">📊</span>
+                        <div class="project-overlay">
+                            <a href="https://app.netlify.com/teams/denisgakwisi66/projects" target="_blank" rel="noopener noreferrer" aria-label="Netlify">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.15 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.62.24 2.85.12 3.15.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                            </a>
+                            <a href="https://analyticsdashb0ard.netlify.app/" target="_blank" rel="noopener noreferrer" aria-label="Live Demo">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <span class="project-category">Web App</span>
+                            <span class="project-status status-inprogress">In Progress</span>
+                        </div>
+                        <h3 class="project-title">Analytics Dashboard</h3>
+                        <p class="project-desc">Real-time analytics dashboard with interactive charts, data visualization, and custom reporting tools.</p>
+                        <div class="project-tech">
+                            <span>Vue.js</span><span>D3.js</span><span>Firebase</span><span>HTML&CSS</span>
+                        </div>
+                        <div class="project-footer">
+                            <span class="project-date">2024</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card" data-category="api" data-reveal>
+                    <div class="project-image">
+                        <span class="project-emoji">🔌</span>
+                        <div class="project-overlay">
+                            <a href="https://github.com/denisgakwisi66-oss" target="_blank" rel="noopener noreferrer" aria-label="View GitHub profile">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.15 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.62.24 2.85.12 3.15.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <span class="project-category">API</span>
+                            <span class="project-status status-completed">Completed</span>
+                        </div>
+                        <h3 class="project-title">RESTful API Gateway</h3>
+                        <p class="project-desc">Scalable API gateway with authentication, rate limiting, logging, and microservice integration.</p>
+                        <div class="project-tech">
+                            <span>Node.js</span><span>Express</span><span>JWT</span><span>Redis</span>
+                        </div>
+                        <div class="project-footer">
+                            <span class="project-date">2023</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="project-card" data-category="mobile" data-reveal>
+                    <div class="project-image">
+                        <span class="project-emoji">📱</span>
+                        <div class="project-overlay">
+                            <a href="https://github.com/denisgakwisi66-oss" target="_blank" rel="noopener noreferrer" aria-label="View GitHub profile">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.15 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.62.24 2.85.12 3.15.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <span class="project-category">Mobile App</span>
+                            <span class="project-status status-completed">Completed</span>
+                        </div>
+                        <h3 class="project-title">Fitness Tracker App</h3>
+                        <p class="project-desc">Cross-platform mobile app for tracking workouts, nutrition, and health metrics with social features.</p>
+                        <div class="project-tech">
+                            <span>React Native</span><span>Firebase</span><span>Redux</span>
+                        </div>
+                        <div class="project-footer">
+                            <span class="project-date">2023</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="project-card" data-category="design" data-reveal>
+                    <div class="project-image">
+                        <span class="project-emoji">🖌️</span>
+                        <div class="project-overlay">
+                            <a href="https://github.com/denisgakwisi66-oss" target="_blank" rel="noopener noreferrer" aria-label="View GitHub profile">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.15 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.62.24 2.85.12 3.15.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <span class="project-category">UI/UX Design</span>
+                            <span class="project-status status-completed">Completed</span>
+                        </div>
+                        <h3 class="project-title">Portfolio Website Design</h3>
+                        <p class="project-desc">Complete UI/UX design for a creative portfolio website with focus on visual storytelling and branding.</p>
+                        <div class="project-tech">
+                            <span>Figma</span><span>Illustrator</span><span>Branding</span>
+                        </div>
+                        <div class="project-footer">
+                            <span class="project-date">2023</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 7 -->
+                <div class="project-card" data-category="web" data-reveal>
+                    <div class="project-image">
+                        <span class="project-emoji">📷</span>
+                        <div class="project-overlay">
+                            <a href="https://app.netlify.com/teams/denisgakwisi66/projects" target="_blank" rel="noopener noreferrer" aria-label="Netlify">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.15 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.62.24 2.85.12 3.15.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                            </a>
+                            <a href="https://denphotography.netlify.app/" target="_blank" rel="noopener noreferrer" aria-label="Live Demo">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <span class="project-category">Web App</span>
+                            <span class="project-status status-completed">Completed</span>
+                        </div>
+                        <h3 class="project-title">DEN Photography</h3>
+                        <p class="project-desc">Complete web app for a creative photography portfolio site with focus on visual branding.</p>
+                        <div class="project-tech">
+                            <span>HTML</span><span>CSS</span><span>JavaScript</span>
+                        </div>
+                        <div class="project-footer">
+                            <span class="project-date">2026</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="no-results" id="noResults">No projects found matching your search.</div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div>
+                <h3 class="footer-name">GAKWISI Shimo Denis</h3>
+                <p class="footer-tagline">Building the future, one line of code at a time.</p>
+                <div class="footer-social">
+                    <a href="mailto:denisgakwisi66@gmail.com" aria-label="Email">✉</a>
+                    <a href="https://wa.me/250780321523" aria-label="WhatsApp">📱</a>
+                    <a href="https://www.instagram.com/g.s.d58/" aria-label="Instagram">📸</a>
+                </div>
+            </div>
+            <div>
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="skills.html">Skills & Services</a></li>
+                    <li><a href="contacts.html">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="mailto:denisgakwisi66@gmail.com">denisgakwisi66@gmail.com</a></li>
+                    <li><a href="https://wa.me/250780321523">+250 780 321 523</a></li>
+                    <li>@g.s.d58</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="year"></span> GAKWISI Shimo Denis. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top -->
+    <button type="button" class="scroll-top" id="scrollTop" aria-label="Scroll to top">↑</button>
+
+    <script src="assets/main.js" defer></script>
+    <script src="assets/chatbot.js" defer></script>
+    <script>
+        (function() {
+            'use strict';
+            document.addEventListener('DOMContentLoaded', function() {
+                // ===== Projects Filter & Search =====
+                const searchInput = document.getElementById('searchInput');
+                const filterBtns = document.querySelectorAll('.filter-btn');
+                const projectCards = document.querySelectorAll('.project-card');
+                const noResults = document.getElementById('noResults');
+
+                let currentFilter = 'all';
+                let currentSearch = '';
+
+                function filterProjects() {
+                    let visibleCount = 0;
+                    projectCards.forEach(function(card) {
+                        const category = card.dataset.category;
+                        const title = card.querySelector('.project-title').textContent.toLowerCase();
+                        const desc = card.querySelector('.project-desc').textContent.toLowerCase();
+                        const techSpans = card.querySelectorAll('.project-tech span');
+                        const tech = Array.from(techSpans).map(function(s) { return s.textContent.toLowerCase(); }).join(' ');
+
+                        const matchesFilter = currentFilter === 'all' || category === currentFilter;
+                        const matchesSearch = currentSearch === '' ||
+                            title.includes(currentSearch) ||
+                            desc.includes(currentSearch) ||
+                            tech.includes(currentSearch);
+
+                        if (matchesFilter && matchesSearch) {
+                            card.classList.remove('hidden');
+                            visibleCount++;
+                        } else {
+                            card.classList.add('hidden');
+                        }
+                    });
+
+                    noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+                }
+
+                filterBtns.forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        filterBtns.forEach(function(b) { b.classList.remove('active'); });
+                        this.classList.add('active');
+                        currentFilter = this.dataset.filter;
+                        filterProjects();
+                    });
+                });
+
+                searchInput.addEventListener('input', function() {
+                    currentSearch = this.value.toLowerCase().trim();
+                    filterProjects();
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

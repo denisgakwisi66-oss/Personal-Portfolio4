@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | GAKWISI Shimo Denis</title>
+    <meta name="description" content="Learn about GAKWISI Shimo Denis - Full-Stack Developer & UI/UX Designer. Biography, education, experience, and career journey.">
+    <link rel="canonical" href="https://den-web.netlify.app/about.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://den-web.netlify.app/about.html">
+    <meta property="og:title" content="About | GAKWISI Shimo Denis">
+    <meta property="og:description" content="Learn about GAKWISI Shimo Denis - Full-Stack Developer & UI/UX Designer. Biography, education, experience, and career journey.">
+    <meta property="og:image" content="https://den-web.netlify.app/ppp.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="About | GAKWISI Shimo Denis">
+    <meta name="twitter:description" content="Learn about GAKWISI Shimo Denis - Full-Stack Developer & UI/UX Designer. Biography, education, experience, and career journey.">
+    <meta name="twitter:image" content="https://den-web.netlify.app/ppp.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/style.css">
+
+    <style>
+        /* ===== About Hero ===== */
+        .about-hero {
+            padding: 120px 0 60px;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            text-align: center;
+        }
+        .about-hero-title {
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin: 0.5rem 0;
+        }
+        .about-hero-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* ===== Biography ===== */
+        .biography {
+            padding: 4rem 0;
+        }
+        .bio-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .bio-content h2 {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .bio-content p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 0.75rem;
+        }
+        .bio-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+        .bio-stat { text-align: center; }
+        .bio-stat-number {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .bio-stat-label { color: var(--text-secondary); font-size: 0.875rem; font-weight: 500; }
+
+        .bio-image-wrapper {
+            width: 400px;
+            height: 400px;
+            margin: 0 auto;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: var(--shadow-xl);
+            animation: float 6s ease-in-out infinite;
+        }
+        .bio-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            display: block;
+        }
+        @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        .bio-ring {
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: var(--accent);
+            border-right-color: var(--secondary);
+            animation: spin 10s linear infinite;
+        }
+
+        /* ===== Values ===== */
+        .values {
+            padding: 4rem 0;
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        .value-card {
+            background: var(--bg);
+            padding: 2rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: all var(--transition);
+        }
+        .value-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--primary);
+        }
+        .value-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+        .value-card h3 { font-size: 1.125rem; margin-bottom: 0.5rem; }
+        .value-card p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; }
+
+        /* ===== Timeline ===== */
+        .timeline-section {
+            padding: 4rem 0;
+        }
+        .timeline {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            padding: 0 2rem;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: var(--border);
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-left: calc(50% + 30px);
+        }
+        .timeline-item:nth-child(odd) {
+            padding-left: 0;
+            padding-right: calc(50% + 30px);
+            text-align: right;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: 3px solid var(--bg);
+            box-shadow: 0 0 0 4px var(--primary);
+            z-index: 1;
+        }
+        .timeline-dot.education {
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            box-shadow: 0 0 0 4px var(--secondary);
+        }
+        .timeline-content {
+            background: var(--surface);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            transition: all var(--transition);
+        }
+        .timeline-content:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+        }
+        .timeline-date {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .timeline-title {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 0.5rem 0 0.25rem;
+        }
+        .timeline-company {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .timeline-desc { color: var(--text-secondary); line-height: 1.6; }
+        .timeline-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+        .timeline-tags span {
+            padding: 0.25rem 0.75rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+        .timeline-item:nth-child(odd) .timeline-tags { justify-content: flex-end; }
+
+        /* ===== Certifications ===== */
+        .certs {
+            padding: 4rem 0;
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        .certs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        .cert-card {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            background: var(--bg);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            transition: all var(--transition);
+        }
+        .cert-card:hover {
+            transform: translateX(8px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow);
+        }
+        .cert-icon { font-size: 2rem; }
+        .cert-info h3 { font-size: 1rem; font-weight: 600; }
+        .cert-info p { color: var(--text-secondary); font-size: 0.875rem; }
+        .cert-year {
+            display: inline-block;
+            padding: 0.125rem 0.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 0.25rem;
+        }
+
+        /* ===== Achievements ===== */
+        .achievements {
+            padding: 4rem 0;
+        }
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        .achievement-card {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            position: relative;
+            transition: all var(--transition);
+        }
+        .achievement-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--primary);
+        }
+        .achievement-number {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary);
+            opacity: 0.1;
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+        }
+        .achievement-card h3 { font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem; }
+        .achievement-card p { color: var(--text-secondary); line-height: 1.6; }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 1024px) {
+            .bio-grid { grid-template-columns: 1fr; text-align: center; }
+            .bio-image-wrapper { width: 300px; height: 300px; }
+            .bio-stats { justify-items: center; }
+            .values-grid { grid-template-columns: repeat(2, 1fr); }
+            .achievements-grid { grid-template-columns: 1fr; max-width: 500px; }
+            .timeline::before { left: 30px; }
+            .timeline-item,
+            .timeline-item:nth-child(odd) {
+                padding-left: 70px;
+                padding-right: 0;
+                text-align: left;
+            }
+            .timeline-dot { left: 30px; }
+            .timeline-item:nth-child(odd) .timeline-tags { justify-content: flex-start; }
+        }
+        @media (max-width: 768px) {
+            .about-hero-title { font-size: 2.5rem; }
+            .bio-image-wrapper { width: 220px; height: 220px; }
+            .values-grid { grid-template-columns: 1fr; max-width: 400px; }
+            .certs-grid { grid-template-columns: 1fr; max-width: 500px; }
+            .bio-stats { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 480px) {
+            .about-hero-title { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Loading Screen -->
+    <div id="loadingScreen">
+        <div class="loading-inner">
+            <div class="loading-spinner"></div>
+            <p class="loading-name">GAKWISI Shimo Denis</p>
+            <p class="loading-text">Loading Portfolio...</p>
+        </div>
+    </div>
+
+    <!-- Scroll Progress -->
+    <div id="scrollProgress"></div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <a href="index.html" class="nav-logo">GSD</a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html" class="active">About</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="skills.html">Skills & Services</a></li>
+            <li><a href="contacts.html">Contact</a></li>
+        </ul>
+        <div class="nav-controls">
+            <button type="button" class="theme-toggle" id="themeToggle">
+                <span class="theme-icon-sun">☀️</span>
+                <span class="theme-icon-moon">🌙</span>
+            </button>
+            <button type="button" class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html">Home</a>
+        <a href="about.html" class="active">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="skills.html">Skills & Services</a>
+        <a href="contacts.html">Contact</a>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- About Hero -->
+        <section class="about-hero">
+            <div class="container">
+                <span class="section-badge">About Me</span>
+                <h1 class="about-hero-title">Who I Am</h1>
+                <p class="about-hero-subtitle">A passionate developer dedicated to crafting exceptional digital experiences</p>
+            </div>
+        </section>
+
+        <!-- Biography -->
+        <section class="biography">
+            <div class="container">
+                <div class="bio-grid">
+                    <div class="bio-content" data-reveal>
+                        <h2>My Biography</h2>
+                        <p>I'm GAKWISI Shimo Denis, a passionate Full-Stack Developer and UI/UX Designer based in Rwanda. With a deep love for technology and design, I create digital solutions that make a difference.</p>
+                        <p>My journey in tech began with a curiosity about how websites work, which evolved into a career focused on building beautiful, performant, and user-centered applications. I believe in writing clean code and designing intuitive interfaces that people love to use.</p>
+                        <p>When I'm not coding, I enjoy exploring new technologies, contributing to open-source projects, and mentoring aspiring developers. I'm committed to continuous learning and staying at the forefront of web development trends.</p>
+                        <div class="bio-stats">
+                            <div class="bio-stat">
+                                <span class="bio-stat-number">3+</span>
+                                <div class="bio-stat-label">Years Experience</div>
+                            </div>
+                            <div class="bio-stat">
+                                <span class="bio-stat-number">50+</span>
+                                <div class="bio-stat-label">Projects Completed</div>
+                            </div>
+                            <div class="bio-stat">
+                                <span class="bio-stat-number">30+</span>
+                                <div class="bio-stat-label">Happy Clients</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-reveal>
+                        <div class="bio-image-wrapper">
+                            <img src="ppp.jpg" alt="GAKWISI Shimo Denis" class="bio-image" height="400" width="400" loading="lazy">
+                            <div class="bio-ring"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Values -->
+        <section class="values">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge">Core Values</span>
+                    <h2 class="section-title">What Drives Me</h2>
+                    <p class="section-subtitle">The principles that guide my work and life</p>
+                </div>
+                <div class="values-grid">
+                    <div class="value-card" data-reveal>
+                        <div class="value-icon">💡</div>
+                        <h3>Innovation</h3>
+                        <p>Constantly exploring new technologies and creative solutions to solve complex problems.</p>
+                    </div>
+                    <div class="value-card" data-reveal>
+                        <div class="value-icon">🎯</div>
+                        <h3>Quality</h3>
+                        <p>Delivering excellence in every project with attention to detail and clean, maintainable code.</p>
+                    </div>
+                    <div class="value-card" data-reveal>
+                        <div class="value-icon">🤝</div>
+                        <h3>Collaboration</h3>
+                        <p>Working closely with clients and teams to bring visions to life through effective communication.</p>
+                    </div>
+                    <div class="value-card" data-reveal>
+                        <div class="value-icon">🌱</div>
+                        <h3>Growth</h3>
+                        <p>Committed to continuous learning and personal development in the ever-evolving tech landscape.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline -->
+        <section class="timeline-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge">My Journey</span>
+                    <h2 class="section-title">Experience & Education</h2>
+                    <p class="section-subtitle">A timeline of my professional growth and learning</p>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item" data-reveal>
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-date">2024 - Present</span>
+                            <h3 class="timeline-title">Full-Stack Developer</h3>
+                            <div class="timeline-company">Freelance</div>
+                            <p class="timeline-desc">Building custom web applications for clients across various industries. Specializing in React, Node.js, and modern web technologies.</p>
+                            <div class="timeline-tags">
+                                <span>React</span><span>Node.js</span><span>MongoDB</span><span>Tailwind</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item" data-reveal>
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-date">2023 - 2024</span>
+                            <h3 class="timeline-title">UI/UX Designer</h3>
+                            <div class="timeline-company">Design Studio</div>
+                            <p class="timeline-desc">Designed user interfaces and experiences for web and mobile applications. Conducted user research and created wireframes, prototypes, and design systems.</p>
+                            <div class="timeline-tags">
+                                <span>Figma</span><span>Adobe XD</span><span>UI Design</span><span>UX Research</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item" data-reveal>
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-date">2022 - 2023</span>
+                            <h3 class="timeline-title">Junior Developer</h3>
+                            <div class="timeline-company">Tech Startup</div>
+                            <p class="timeline-desc">Started my professional journey as a junior developer, learning best practices and contributing to production applications with guidance from senior developers.</p>
+                            <div class="timeline-tags">
+                                <span>JavaScript</span><span>HTML/CSS</span><span>Git</span><span>Agile</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item" data-reveal>
+                        <div class="timeline-dot education"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-date">2021 - 2024</span>
+                            <h3 class="timeline-title">Bachelor's in Computer Science</h3>
+                            <div class="timeline-company">University of Rwanda</div>
+                            <p class="timeline-desc">Comprehensive education in computer science fundamentals, software engineering, algorithms, data structures, and web development.</p>
+                            <div class="timeline-tags">
+                                <span>Software Engineering</span><span>Algorithms</span><span>Web Development</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications -->
+        <section class="certs">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge">Certifications</span>
+                    <h2 class="section-title">Professional Certifications</h2>
+                    <p class="section-subtitle">Validated skills and expertise</p>
+                </div>
+                <div class="certs-grid">
+                    <div class="cert-card" data-reveal>
+                        <div class="cert-icon">📜</div>
+                        <div class="cert-info">
+                            <h3>Full-Stack Web Development</h3>
+                            <p>FreeCodeCamp</p>
+                            <span class="cert-year">2023</span>
+                        </div>
+                    </div>
+                    <div class="cert-card" data-reveal>
+                        <div class="cert-icon">📜</div>
+                        <div class="cert-info">
+                            <h3>UI/UX Design Specialization</h3>
+                            <p>Google (Coursera)</p>
+                            <span class="cert-year">2023</span>
+                        </div>
+                    </div>
+                    <div class="cert-card" data-reveal>
+                        <div class="cert-icon">📜</div>
+                        <div class="cert-info">
+                            <h3>JavaScript Algorithms & Data Structures</h3>
+                            <p>FreeCodeCamp</p>
+                            <span class="cert-year">2022</span>
+                        </div>
+                    </div>
+                    <div class="cert-card" data-reveal>
+                        <div class="cert-icon">📜</div>
+                        <div class="cert-info">
+                            <h3>Responsive Web Design</h3>
+                            <p>FreeCodeCamp</p>
+                            <span class="cert-year">2022</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Achievements -->
+        <section class="achievements">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge">Achievements</span>
+                    <h2 class="section-title">Key Achievements</h2>
+                </div>
+                <div class="achievements-grid">
+                    <div class="achievement-card" data-reveal>
+                        <div class="achievement-number">01</div>
+                        <h3>50+ Projects Delivered</h3>
+                        <p>Successfully delivered over 50 web development and design projects for clients worldwide.</p>
+                    </div>
+                    <div class="achievement-card" data-reveal>
+                        <div class="achievement-number">02</div>
+                        <h3>30+ Happy Clients</h3>
+                        <p>Maintained a 98% satisfaction rate with clients across different industries and regions.</p>
+                    </div>
+                    <div class="achievement-card" data-reveal>
+                        <div class="achievement-number">03</div>
+                        <h3>Open Source Contributor</h3>
+                        <p>Active contributor to open-source projects, helping build tools used by thousands of developers.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div>
+                <h3 class="footer-name">GAKWISI Shimo Denis</h3>
+                <p class="footer-tagline">Building the future, one line of code at a time.</p>
+                <div class="footer-social">
+                    <a href="mailto:denisgakwisi66@gmail.com" aria-label="Email">✉</a>
+                    <a href="https://wa.me/250780321523" aria-label="WhatsApp">📱</a>
+                    <a href="https://www.instagram.com/g.s.d58/" aria-label="Instagram">📸</a>
+                </div>
+            </div>
+            <div>
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="skills.html">Skills & Services</a></li>
+                    <li><a href="contacts.html">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="mailto:denisgakwisi66@gmail.com">denisgakwisi66@gmail.com</a></li>
+                    <li><a href="https://wa.me/250780321523">+250 780 321 523</a></li>
+                    <li>@g.s.d58</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="year"></span> GAKWISI Shimo Denis. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top -->
+    <button type="button" class="scroll-top" id="scrollTop" aria-label="Scroll to top">↑</button>
+
+    <script src="assets/main.js" defer></script>
+    <script src="assets/chatbot.js" defer></script>
+</body>
+</html>
